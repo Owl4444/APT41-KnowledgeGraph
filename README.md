@@ -23,13 +23,14 @@ MATCH (n) RETURN n
 We can make use of collect to create a list of APT Group names. For each of the malware `m`, it would then count the total number of APT Groups and as long as there are more than 1 count, then we want to display the results starting from highest group count.
 
 ```
-MATCH (m:Malware)<-[:USES_MALWARE]-(g:APT_GROUP)
+MATCH (m:Malware)<-[:DEPLOYS]-(g:APT_GROUP)
 WITH m, collect(g.name) as groups, count(g) as group_count
 WHERE group_count > 1
 RETURN m.name as Malware, groups, group_count
 ORDER BY group_count DESC
 ```
 
+![search_overlapping](img/search_overlapping_apt.png)
 
 ## Query all the malware that was deployed by specific APT
 
@@ -38,6 +39,7 @@ MATCH (apt:APT_GROUP  {name:"APT41"})-[:DEPLOYS]->(m:Malware)
 RETURN m.name as Malware
 ORDER BY m.name
 ```
+![query_deployed malware](img/query_deployed_malware.png)
 
 ## Query all apt groups using specific malware
 
@@ -47,6 +49,8 @@ RETURN g.name as APT
 order by g.name
 ```
 
+![query groups using specific malware](img/query_apt_specific_malware.png)
+
 ## Query for All IoCs (Indicators of Compromise) Associated with a Specific APT Group
 
 ```
@@ -54,6 +58,8 @@ MATCH (apt:APT_GROUP {name:"APT41"})-[:HAS_IOC]->(:IOC_LIST)-[:CONTAINS_IOC]->(i
 return ioc.hash as Hash, ioc.threat as Threat
 ORDER BY ioc.hash
 ```
+
+![query IOC associalted](img/query_associated_ioc.png)
 
 ## Query for shared tools between APT
 
@@ -66,6 +72,7 @@ RETURN g1.name as Group1, g2.name as Group2, collect(m.name) as SharedMalware
 ORDER BY size(collect(m.name)) DESC, g1.name, g2.name
 ```
 
+![query_shared_tool](img/query_shared_tool.png)
 
 ## Query for Detailed Information on a Specific Malware Including Its Variants, Droppers, and APT Groups Using It
 
@@ -80,6 +87,8 @@ return m.name as Malware, collect(distinct d.name) as DroppedBy,
 collect(distinct v.md5) as Variants,collect(distinct g.name) as DeployedBy
 ```
 
+![query_detailed_information](img/query_detailed_information.png)
+
 ## Query for all apt groups, their associated IOCS and the malware they used
 
 ```
@@ -88,6 +97,8 @@ OPTIONAL MATCH (apt)-[:HAS_IOC]->(:IOC_LIST)-[:CONTAINS_IOC]->(ioc:IoCs)
 RETURN apt.name as APT, collect (m.name) as Malware, collect (distinct ioc.hash) as IOCs
 ORDER BY apt.name
 ```
+
+![query_apt](img/query_apt.png)
 
 ---
 
