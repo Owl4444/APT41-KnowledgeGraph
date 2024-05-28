@@ -1,5 +1,5 @@
 # APT41 - Knowledge Graph with Neo4J
-Experimentation of Neo4J for knowledge mapping and Querying. Testing out ease of use for TI though this idea is not original
+Experimentation of Neo4J for knowledge mapping and Querying. Testing out ease of use for TI though this idea is not original. This could be part of a simluation of how Mandiant find out about tools that were shared amongst different APT groups as well as the tools/malware that were shared among them. We can see some overlaps and that their relationship can be easily visualized. Not all information about this APT is here but definitely something that anyone can build upon! Overall, I think I can see the benefits of knowledge graph creation when tracking activities of threat actor assuming we have the right tech stack, intel and telemetry to do so.
 
 # DATA Sources
 - Mandiant
