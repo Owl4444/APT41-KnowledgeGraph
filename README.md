@@ -8,7 +8,7 @@ Experimentation of Neo4J for knowledge mapping and Querying. Testing out ease of
   - https://www.virustotal.com/gui/reference/815f0686638ec516ea260507ab1b76678b2ef33bf40ef4fb279cc417fc3681fb
 
 # Queries
-Some interesting queries that we can make.
+Some interesting queries that we can make. Feel free to create more queries to play around as well :D
 
 ## Display the whole graph
 
