@@ -16,6 +16,8 @@ Some interesting queries that we can make.
 MATCH (n) RETURN n
 ```
 
+![match all](img/match_all.png)
+
 ## SEARCHING FOR OVERLAPPING APT USING SIMILAR MALWARE
 
 We can make use of collect to create a list of APT Group names. For each of the malware `m`, it would then count the total number of APT Groups and as long as there are more than 1 count, then we want to display the results starting from highest group count.
